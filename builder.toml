@@ -1,0 +1,30 @@
+# Buildpacks to include in builder
+[[buildpacks]]
+id = "org.cloudfoundry.openjdk"
+uri = "../../go/src/github.com/cloudfoundry/openjdk-cnb"
+
+[[buildpacks]]
+id = "org.cloudfoundry.jvmapplication"
+uri = "../../go/src/github.com/cloudfoundry/jvm-application-cnb"
+
+[[buildpacks]]
+id = "org.cloudfoundry.springboot"
+uri = "../../go/src/github.com/cloudfoundry/spring-boot-cnb"
+
+# Order used for detection
+[[order]]
+group = [
+
+### Order is strictly enforced
+  { id = "org.cloudfoundry.openjdk" },
+
+### Order determines precedence
+  { id = "org.cloudfoundry.jvmapplication" },
+  { id = "org.cloudfoundry.springboot" },
+]
+
+# Stack that will be used by the builder
+[stack]
+id = "io.buildpacks.stacks.bionic"
+run-image = "cloudfoundry/run:base-cnb"
+build-image = "cloudfoundry/build:base-cnb"
